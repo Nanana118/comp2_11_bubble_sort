@@ -3,11 +3,7 @@
 
 #include "../include/lib_func.h"
 
-static void swap(item* p, item* q) {
-    item tmp = *p;
-    *p = *q;
-    *q = tmp;
-}
+
 
 // バブルソート(引数が不適切であればfalseを返す)
 bool bubble_sort(item* begin, const item* end)
@@ -15,12 +11,17 @@ bool bubble_sort(item* begin, const item* end)
     if (begin == NULL || end == NULL) return false;
     if (begin >= end) return false;
 
-    for (item* it = begin; it != end; it++) {
-        for (item* p = begin + (end - 1 - begin); p != it; p--) {
-            if (p->key < (p - 1)->key) {
-                swap(p, p - 1);
+    int n = (int)(end - begin);
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - 1 - i; j++) {
+            if (begin[j].key > begin[j + 1].key) {
+                item tmp = begin[j];
+                begin[j] = begin[j + 1];
+                begin[j + 1] = tmp;
             }
         }
-  }
+    }
+
     return true;
 }
